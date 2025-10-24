@@ -1,0 +1,13 @@
+{
+  "name": "@acme/services",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@acme/models": "workspace:*",
+    "@acme/persistence": "workspace:*",
+    "bcryptjs": "^2.4.3"
+  }
+}
