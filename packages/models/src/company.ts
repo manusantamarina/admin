@@ -1,4 +1,3 @@
-/** Datos que una empresa puede tener en la DB */
 export interface Company {
   id: string;
   name: string;
@@ -10,12 +9,11 @@ export interface Company {
   updatedAt: Date;
 }
 
-/** Datos requeridos para crear una empresa desde el front */
 export interface NewCompany {
   name: string;
   cuit: string;
   email: string;
-  password: string; // el front manda la password en texto
+  password: string; 
   phone?: string;
   address?: string;
 }

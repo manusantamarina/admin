@@ -1,6 +1,13 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "../packages/typescript-config/nextjs.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@acme/models": ["../packages/models/src/index.ts"],
+      "@acme/interfaces": ["../packages/interfaces/src/index.ts"],
+      "@acme/persistence": ["../packages/persistence/src/index.ts"],
+      "@acme/services": ["../packages/services/src/index.ts"]
+    },
     "plugins": [
       {
         "name": "next"
