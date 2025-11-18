@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { Field, inputCls } from "@repo/ui/field";
 import type { NewCompany } from "@acme/models";
-import { company-service } from "@acme/interfaces"
 
 // Props opcionales: permitir manejar el submit desde afuera
 type Props = {
@@ -69,9 +68,27 @@ export default function RegisterPage({ onSubmit, isSubmitting }: Props) {
       setSubmitting(true);
       if (onSubmit) await onSubmit(values);
       else {
-        // Por ahora, sin backend: mostrás los datos en consola
-        console.log("Register payload", values);
-        alert("Registro enviado (demo). Reemplazá onSubmit para integrarlo al backend.");
+        const res = await fetch("/api/companies", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+
+        if (!res.ok) {
+          let message = "Error al registrar la empresa";
+          try {
+            const data = await res.json();
+            if (data?.error && typeof data.error === "string") {
+              message = data.error;
+            }
+          } catch {
+            // ignorar error al parsear
+          }
+          alert(message);
+          return;
+        }
+
+        alert("Empresa registrada correctamente");
       }
     } finally {
       setSubmitting(false);

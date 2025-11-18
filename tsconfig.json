@@ -43,8 +43,10 @@
 
     "baseUrl": ".",
     "paths": {
-      "@acme/*": ["packages/*/src/index.ts"],
-      "@acme/*/*": ["packages/*/src/*"]
+      "@acme/models": ["packages/models/src/index.ts"],
+      "@acme/interfaces": ["packages/interfaces/src/index.ts"],
+      "@acme/persistence": ["packages/persistence/src/index.ts"],
+      "@acme/services": ["packages/services/src/index.ts"]
     }
   }
 }
