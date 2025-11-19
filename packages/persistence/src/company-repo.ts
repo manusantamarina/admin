@@ -1,7 +1,7 @@
 import { db } from "./db";
 import { companies } from "./schema";
 import { eq } from "drizzle-orm";
-import type { Company, NewCompany } from "@acme/models";
+import type { Company, LoginComapny, NewCompany } from "@acme/models";
 
 /**
  * Inserta una compañía en la base de datos.
@@ -62,5 +62,18 @@ export async function getCompanyByEmail(email: string): Promise<Company | null> 
     ...(row.address == null ? {} : { address: row.address }),
     createdAt: row.createdAt!,
     updatedAt: row.updatedAt!,
+  };
+}
+
+export async function getLoginCompany(email: string): Promise<LoginComapny | null>{
+  const row = await db.query.companies.findFirst({
+    where: eq(companies.email, email),
+  });
+
+  if (!row) return null;
+
+  return {
+    email: row.email,
+    password: row.passwordHash
   };
 }

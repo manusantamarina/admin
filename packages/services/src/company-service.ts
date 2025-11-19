@@ -1,5 +1,5 @@
 import type { CompanyService } from "@acme/interfaces";
-import { insertCompany, getCompanyByEmail } from "@acme/persistence";
+import { insertCompany, getCompanyByEmail , getLoginCompany} from "@acme/persistence";
 import bcrypt from "bcryptjs";
 
 export const companyService: CompanyService = {
@@ -11,6 +11,18 @@ export const companyService: CompanyService = {
 
   async getCompanyByEmail(email){
     return getCompanyByEmail(email);
+  },
+
+  async getLoginCompany(email){
+    return getLoginCompany(email)
+  },
+
+  async validateCompany(input) {
+    const toCompare = await getLoginCompany(input.email);
+    if(!toCompare){
+      return false;
+    }
+    return bcrypt.compare(input.password,toCompare.password);
   }
 };
 

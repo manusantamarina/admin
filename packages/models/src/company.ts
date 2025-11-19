@@ -17,3 +17,8 @@ export interface NewCompany {
   phone?: string;
   address?: string;
 }
+
+export interface LoginComapny{
+  email: string;
+  password: string;
+}
