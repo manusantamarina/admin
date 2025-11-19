@@ -1,5 +1,5 @@
-import { db } from "./db.js";
-import { companies } from "./schema.js";
+import { db } from "./db";
+import { companies } from "./schema";
 import { eq } from "drizzle-orm";
 import type { Company, NewCompany } from "@acme/models";
 

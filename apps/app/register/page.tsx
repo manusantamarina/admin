@@ -13,7 +13,6 @@ type Props = {
 // Utilidades simples de validación
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Acepta 11 dígitos con o sin guiones (ej: 20-12345678-3 o 20123456783)
-const cuitRegex = /^(\d{2}-?\d{8}-?\d)$/;
 
 export default function RegisterPage({ onSubmit, isSubmitting }: Props) {
   const [values, setValues] = useState<NewCompany>({
@@ -45,7 +44,6 @@ export default function RegisterPage({ onSubmit, isSubmitting }: Props) {
 
     const cuit = (data.cuit ?? "").replaceAll(" ", "");
     if (!cuit) next.cuit = "Obligatorio";
-    else if (!cuitRegex.test(cuit)) next.cuit = "Formato inválido";
 
     if (!data.email?.trim()) next.email = "Obligatorio";
     else if (!emailRegex.test(data.email)) next.email = "Email inválido";
